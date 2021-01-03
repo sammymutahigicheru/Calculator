@@ -31,7 +31,7 @@ class App extends Component {
       {symbol:'2',cols:1,action: this.addToCurrent},
       {symbol:'3',cols:1,action: this.addToCurrent},
       {symbol:'+',cols:1,action: this.addToCurrent},
-      {symbol:'0',cols:1,action: this.addToCurrent},
+      {symbol:'0',cols:2,action: this.addToCurrent},
       {symbol:'-',cols:1,action: this.addToCurrent},
       {symbol:'=',cols:1,action: this.addToCurrent},
     ];
@@ -39,7 +39,7 @@ class App extends Component {
       <div className="App">
         <input className = "result" type="test" value={this.state.current} />
         {buttons.map((btn,i) => {
-          return <Button symbol={btn.symbol} cols={btn.cols} action={(symbol) => btn.action} />
+          return <Button key={i} symbol={btn.symbol} cols={btn.cols} action={(symbol) => btn.action(symbol)} />
         })}
       </div>
     );
