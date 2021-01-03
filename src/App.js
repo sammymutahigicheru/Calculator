@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      current: '0',
+      current: '',
       previous: []
     }
   }
@@ -14,7 +14,13 @@ class App extends Component {
     this.setState({result: '0'});
   }
   addToCurrent = (symbol) =>{
+    if(["/","-","+","x"].indexOf(symbol) > -1){
+      let {previous} = this.state
+      previous.concat(this.state.current + symbol);
+      this.setState({previous});
+    }
     this.setState({current: this.state.current + symbol});
+    
   }
   render(){
     const buttons = [
@@ -38,6 +44,9 @@ class App extends Component {
     ];
     return (
       <div className="App">
+        {this.state.previous.length > 0 ?
+        <div className="floaty.last">{this.state.previous[this.state.previous -1]}</div>
+           : null}
         <input className = "result" type="test" value={this.state.current} />
         {buttons.map((btn,i) => {
           return <Button key={i} symbol={btn.symbol} cols={btn.cols} action={(symbol) => btn.action(symbol)} />
