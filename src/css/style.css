@@ -28,3 +28,10 @@ input.result {
     max-width: 100vw;
     font-size: 32px;
 }
+.floaty-last{
+    position: absolute;
+    right: 50px;
+    z-index: 99;
+    top: 10px;
+    color: #aaa;
+}
