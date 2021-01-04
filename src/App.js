@@ -15,7 +15,7 @@ class App extends Component {
     this.setState({current: '0',previous: [],nextIsReset: false});
   }
   addToCurrent = (symbol) =>{
-    if(["/","-","+","x"].indexOf(symbol) > -1){
+    if(["/","-","+","*"].indexOf(symbol) > -1){
       let {previous} = this.state
       previous.push(this.state.current + symbol);
       this.setState({previous, nextIsReset: true});
@@ -29,6 +29,14 @@ class App extends Component {
     }
     
   }
+  calculate = (symbol) =>{
+    let {current,previous,nextIsReset} = this.state;
+    if(previous.length > 0){
+      current = eval(String(previous[previous.length - 1] + current));
+      this.setState({current: this.state.current + symbol})
+    }
+  }
+
   render(){
     const buttons = [
       {symbol: 'C',cols:3,action: this.reset},
@@ -36,7 +44,7 @@ class App extends Component {
       {symbol:'7',cols:1,action: this.addToCurrent},
       {symbol:'8',cols:1,action: this.addToCurrent},
       {symbol:'9',cols:1,action: this.addToCurrent},
-      {symbol:'x',cols:1,action: this.addToCurrent},
+      {symbol:'*',cols:1,action: this.addToCurrent},
       {symbol:'4',cols:1,action: this.addToCurrent},
       {symbol:'5',cols:1,action: this.addToCurrent},
       {symbol:'6',cols:1,action: this.addToCurrent},
@@ -46,7 +54,7 @@ class App extends Component {
       {symbol:'3',cols:1,action: this.addToCurrent},
       {symbol:'+',cols:1,action: this.addToCurrent},
       {symbol:'0',cols:2,action: this.addToCurrent},
-      {symbol:'-',cols:1,action: this.addToCurrent},
+      {symbol:'.',cols:1,action: this.addToCurrent},
       {symbol:'=',cols:1,action: this.addToCurrent},
     ];
     return (
